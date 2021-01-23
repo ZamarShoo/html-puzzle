@@ -164,8 +164,16 @@ function js(cb) {
                 }
               }
             ]
-          }
-        }))
+          },
+          plugins: [
+            new webpack.ProvidePlugin({
+              $: 'jquery',
+              jQuery: 'jquery',
+              'window.jQuery': 'jquery'
+            }),
+          ]
+        },
+        ))
         .pipe(dest(path.build.js))
         .pipe(browserSync.reload({stream: true}));
 
@@ -187,7 +195,14 @@ function jsWatch(cb) {
           mode: "development",
           output: {
             filename: 'app.js',
-          }
+          },
+          plugins: [
+            new webpack.ProvidePlugin({
+              $: 'jquery',
+              jQuery: 'jquery',
+              'window.jQuery': 'jquery'
+            }),
+          ]
         }))
         .pipe(dest(path.build.js))
         .pipe(browserSync.reload({stream: true}));
